@@ -59,25 +59,27 @@ This file should contain the ensemble of next's informations :
 #### YAML Format Proposition
 
 ```yaml
+---
 - app: <nom application>
-- host: <application_host>
-  services:
-    - Application1
-  propagation_enfants: true/false
-- host: hostapp1
-  services:
-    - memory
-    - partitions
-    - processor
-    - systime
-    - uptime
-  propagation_enfants: true/false
-- host: hostapp2
-  services:
-    - memory
-    - partitions
-    - processor
-    - systime
-    - uptime
-  propagation_enfants: true/false
+  hosts:
+  - host: <application_host>
+    services:
+      - Application1
+    propagation_enfants: true/false
+  - host: hostapp1
+    services:
+      - memory
+      - partitions
+      - processor
+      - systime
+      - uptime
+    propagation_enfants: true/false
+  - host: hostapp2
+    services:
+      - memory
+      - partitions
+      - processor
+      - systime
+      - uptime
+    propagation_enfants: true/false
 ```
