@@ -93,7 +93,15 @@ function thrukSetDowntime($server, $hostname, $servicename, $details) {
     }
 
     $cookies = "user_name=admin; session_id=169014757; user_id=1; group_id=1; user_limitation=0";
-    $url = 'https://'.$server.'/thruk/r/services/'.$hostname.'/'.$servicename.'/cmd/schedule_svc_downtime';
+
+    if ($servicename != '') {
+        // if service name is defined, set downtime for this service
+        $url = 'https://'.$server.'/thruk/r/services/'.$hostname.'/'.$servicename.'/cmd/schedule_svc_downtime';
+    } else {
+        // if not, set downtime to the server itself
+        $url = 'https://'.$server.'/thruk/r/hosts/'.$hostname.'/cmd/schedule_host_downtime';
+    }
+
     $ch = curl_init($url);
 
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
