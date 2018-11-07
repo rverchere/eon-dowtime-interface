@@ -36,27 +36,47 @@ def thrukGetDowntimes(server):
         print 'ERROR, cannot get downtime values'
         return None
 
-def thrukSetHostDowntime(server, host):
+def thrukSetDowntime(server, hostname, servicename):
 #   %> curl -d "start_time=now" -d "end_time=+60m" -d "comment_data='downtime comment'" http://0:3000/thruk/r/services/<host>/<svc>/cmd/schedule_svc_downtime
     downtime = {
         'comment_data': 'Python test'
     }
-    r_exec_downtimes = requests.post('https://%s/thruk/r/hosts/%s/cmd/schedule_host_downtime' % (server, host),
-                                        cookies=cookie, headers=headers,
-                                        data=json.dumps(downtime))
+    if servicename:
+        url = 'https://%s/thruk/r/services/%s/%s/cmd/schedule_svc_downtime' % (server, hostname, servicename)
+    else:
+        url = 'https://%s/thruk/r/hosts/%s/cmd/schedule_host_downtime' % (server, hostname)
+    r_exec_downtimes = requests.post(url,cookies=cookie, headers=headers, data=json.dumps(downtime))
 
-    pprint(r_exec_downtimes.content)
+    if r_exec_downtimes.status_code == 200:
+        return (r_exec_downtimes)
+    else:
+        print 'ERROR, cannot set downtime for host %s' % hostname
+        pprint(r_exec_downtimes.json())
+        return None
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Play with thruk API with EON, setting downtimes')
     parser.add_argument('-S', '--server', type=str, help='EON server', required=True)
     parser.add_argument('-H', '--hostname', type=str, help='Host to set downtime')
-    parser.add_argument('-s', '--service', type=str, help='Service to set downtime')
+    parser.add_argument('-s', '--servicename', type=str, help='Service to set downtime')
     parser.add_argument('-l', '--list', action="store_true", help='Get Downtime')
 
     args = parser.parse_args()
 
+    retcode = 0
+    # Just print downtimes
     if args.list:
         result = thrukGetDowntimes(args.server)
         if result:
             pprint(result.json())
+        else:
+            retcode = 1
+
+    if args.hostname:
+        result = thrukSetDowntime(args.server, args.hostname, args.servicename)
+        if result:
+            pprint(result.json())
+        else:
+            retcode = 1
+
+    exit(retcode)
