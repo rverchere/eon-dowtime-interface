@@ -21,7 +21,8 @@
 */
 
 # Global parameters
-include("include/config.php");
+include("config.php");
+include("functions.php");
 
 
 # Logos
@@ -65,7 +66,11 @@ if(file_exists($path_eonweb.$path_logo_navbar_custom)) { $path_logo_navbar=$path
 
         <!-- EonWeb Custom CSS -->
         <link href="/css/eonweb.css" rel="stylesheet">
-        <link href="/css/users_downtime.css" rel="stylesheet">
+
+
+        <!--Specific to this page-->
+        <link href="/css/users_downtime.css" rel="stylesheet"/>
+        <script type="text/javascript" src="/include/functions.js"></script>
 </head>
 
 <body>

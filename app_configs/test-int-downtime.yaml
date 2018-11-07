@@ -1,6 +1,6 @@
 ---
-- app: Test-int-downtime
-  hosts:
+app: Test-int-downtime
+hosts:
   - host: Application_Building
     services:
       - Test-int-downtime
