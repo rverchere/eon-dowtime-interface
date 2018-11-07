@@ -1,4 +1,8 @@
 - app: Test-int-downtime
+- host: Application_Building
+  services:
+    - Test-int-downtime
+  propagation_childs: false
 - host: Test-int-downtime1
   services:
     - memory

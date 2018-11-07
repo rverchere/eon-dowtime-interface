@@ -63,7 +63,7 @@ This file should contain the ensemble of next's informations :
 - host: <application_host>
   services:
     - Application1
-  - propagation_enfants: true/false
+  propagation_enfants: true/false
 - host: hostapp1
   services:
     - memory
@@ -71,7 +71,7 @@ This file should contain the ensemble of next's informations :
     - processor
     - systime
     - uptime
-  - propagation_enfants: true/false
+  propagation_enfants: true/false
 - host: hostapp2
   services:
     - memory
@@ -79,5 +79,5 @@ This file should contain the ensemble of next's informations :
     - processor
     - systime
     - uptime
-  - propagation_enfants: true/false
+  propagation_enfants: true/false
 ```
