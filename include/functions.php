@@ -33,8 +33,8 @@ function createTableList($yamlConfPath){
     echo '<td class="td_head"></td>';
     echo '</tr>';
     foreach($confPath as $confFile) {
-        $yamlFile=yaml_parse_file($confPath.'/'.$confFile);
-        echo '<td class=td_line>'.$parsed["app"].'</td>';
+        $yamlFile=yaml_parse_file($yamlConfPath.'/'.$confFile);
+        echo '<td class=td_line>'.$yamlFile["app"].'</td>';
         echo '<td class=td_line><input type="text" name="dwt_desc" class="dwt_desc"/></td>';
         echo '<td class=td_line><b>
                 <input type="text" name="dwt_starttime" class="dwt_starttime" value="" data-cip-id="dwt_starttime"/>
