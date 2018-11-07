@@ -1,21 +1,23 @@
+---
 - app: Test-int-downtime
-- host: Application_Building
-  services:
-    - Test-int-downtime
-  propagation_childs: false
-- host: Test-int-downtime1
-  services:
-    - memory
-    - partitions
-    - processor
-    - systime
-    - uptime
-  propagation_childs: false
-- host: Test-int-downtime2
-  services:
-    - memory
-    - partitions
-    - processor
-    - systime
-    - uptime
-  propagation_childs: false
+  hosts:
+  - host: Application_Building
+    services:
+      - Test-int-downtime
+    propagation_childs: false
+  - host: Test-int-downtime1
+    services:
+      - memory
+      - partitions
+      - processor
+      - systime
+      - uptime
+    propagation_childs: false
+  - host: Test-int-downtime2
+    services:
+      - memory
+      - partitions
+      - processor
+      - systime
+      - uptime
+    propagation_childs: false
