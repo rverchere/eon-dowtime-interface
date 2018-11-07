@@ -1,0 +1,15 @@
+- app: Test-int-downtime
+- host: Test-int-downtime1
+  services:
+    - memory
+    - partitions
+    - processor
+    - systime
+    - uptime
+- host: Test-int-downtime2
+  services:
+    - memory
+    - partitions
+    - processor
+    - systime
+    - uptime
