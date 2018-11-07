@@ -6,6 +6,7 @@
     - processor
     - systime
     - uptime
+  propagation_childs: false
 - host: Test-int-downtime2
   services:
     - memory
@@ -13,3 +14,4 @@
     - processor
     - systime
     - uptime
+  propagation_childs: false
