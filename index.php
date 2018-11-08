@@ -1,5 +1,5 @@
 <?php
-include("include/header.php");
+include_once("include/header.php");
 ?>
 		<h2 class="page-header"><?php echo getLabel("label.users_downtime.title") ?> </h2>
 			<form action="include/downtime.php" method="post">
@@ -11,6 +11,6 @@ include("include/header.php");
 			</form>
 
 <?php
-include("include/footer.php");
+include_once("include/footer.php");
 ?>
 

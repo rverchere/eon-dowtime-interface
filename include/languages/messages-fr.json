@@ -387,6 +387,7 @@
 	"label.users_downtime.title": "Déclaration des maintenances applicatives",
 	"label.users_downtime.tablehead.app": "Applications",
 	"label.users_downtime.tablehead.desc": "Cause de la maintenance",
+	"label.users_downtime.tablehead.entrytime": "Déclaration de la maintenance",
 	"label.users_downtime.tablehead.starttime": "Début de maintenance",
 	"label.users_downtime.tablehead.endtime": "Fin de maintenance",
 	"label.using_filter": "filtre utilisé",

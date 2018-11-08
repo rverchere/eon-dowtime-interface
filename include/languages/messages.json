@@ -387,6 +387,7 @@
 	"label.users_downtime.title": "Applications downtime declaration",
 	"label.users_downtime.tablehead.app": "Applications",
 	"label.users_downtime.tablehead.desc": "Downtime cause",
+	"label.users_downtime.tablehead.entrytime": "Downtime set time",
 	"label.users_downtime.tablehead.starttime": "Downtime start",
 	"label.users_downtime.tablehead.endtime": "Downtime end",
 	"label.using_filter": "using filter",
