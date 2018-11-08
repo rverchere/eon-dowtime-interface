@@ -80,6 +80,7 @@ function thrukCurl($ch) {
         return json_decode($output, true);
     }
 }
+
 function thrukGetHost($server, $hostname) {
     $ch = curl_init('https://'.$server.'/thruk/r/hosts/'.$hostname);
     return thrukCurl($ch);
@@ -89,9 +90,24 @@ function thrukGetService($server, $hostname, $service) {
     $ch = curl_init('https://'.$server.'/thruk/r/services/'.$hostname.'/'.$service);
     return thrukCurl($ch);
 }
+
 function thrukGetDowntimes($server) {
     $ch = curl_init('https://'.$server.'/thruk/r/downtimes');
     return thrukCurl($ch);
+}
+
+function thrukGetServiceDowntime($server, $servername, $servicename) {
+    $ch = curl_init('https://'.$server.'/thruk/r/downtimes');
+    $results = thrukCurl($ch);
+    foreach ($results as $result) {
+        if (($result['host_name'] == $servername) && ($result['service_description']) == $servicename) {
+            return $result;
+        }
+    }
+}
+
+function thrukGetHostDowntime($server, $servername) {
+    return thrukGetServiceDowntime($server, $servername, '');
 }
 
 function thrukSetDowntime($server, $hostname, $servicename, $details) {
