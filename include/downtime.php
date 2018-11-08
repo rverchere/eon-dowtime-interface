@@ -18,6 +18,18 @@ if ($_POST['dwt_submit']) {
         'comment_author' => $dwt_author
     ];
 
+    foreach ($yamlFile['app'] as $app) {
+        $appHostName=$app['host'];
+        $appName=$app['service'];
+        $result = thrukSetDowntime($dwt_dest_srv, $appHostName, $appName, $details);
+            if ($result==null) {
+                echo "Cannot set downtime for application ".$appName." <br/>";
+                return -1;
+            } else {
+                echo "Downtime set for application ".$appName." <br/>";
+            }
+    }
+
     foreach ($yamlFile['hosts'] as $hosts) {
         $hostname=$hosts['host'];
         if ($hosts['services']) {
@@ -31,15 +43,14 @@ if ($_POST['dwt_submit']) {
                     echo "Downtime set for ".$hostname."/".$service." <br/>";
                 }
             }
+        }
+        unset($service);
+        $result = thrukSetDowntime($dwt_dest_srv, $hostname, '', $details);
+        if ($result==null) {
+            echo "Cannot set downtime for ".$hostname." <br/>";
+            return -1;
         } else {
-            unset($service);
-            $result = thrukSetDowntime($dwt_dest_srv, $hostname, '', $details);
-            if ($result==null) {
-                echo "Cannot set downtime for ".$hostname." <br/>";
-                return -1;
-            } else {
-                echo "Downtime set for ".$hostname." <br/>";
-            }
+            echo "Downtime set for ".$hostname." <br/>";
         }
     }
 }

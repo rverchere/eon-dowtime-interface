@@ -1,10 +1,9 @@
 ---
-app: Test-int-downtime
-hosts:
+displayname: "Test downtime interface"
+app:
   - host: Applications_Building
-    services:
-      - Test-int-downtime
-    propagation_childs: false
+    service: Test-int-downtime
+hosts:
   - host: Test-int-downtime1
     services:
       - memory

@@ -35,7 +35,7 @@ function createTableList($yamlConfPath){
     echo '</tr>';
     foreach($confPath as $confFile) {
         $yamlFile=yaml_parse_file($yamlConfPath.'/'.$confFile);
-        echo '<td class=td_line>'.$yamlFile["app"].'</td>';
+        echo '<td class=td_line>'.$yamlFile["displayname"].'</td>';
         echo '<td class=td_line><input type="text" name="dwt_desc" class="dwt_desc"/></td>';
         echo '<td class=td_line><b>
                 <div class="input-group date startdate" id="datetimepicker'.$fileCount.$pickerCount.'">
