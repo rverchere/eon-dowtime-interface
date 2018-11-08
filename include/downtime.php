@@ -56,6 +56,19 @@ if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
 }
 
 if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
+    /*
+        EON API REQUEST
+        POST https://localhost/eonapi/listNagiosObjects?&username=admin&apiKey=xxxx
+       {
+        "object": "downtimes",
+        "columns": ["host_name", "service_description", "comment", "entry_time", "start_time", "end_time"],
+        "backendid": "0",
+        "filters": [
+        "host_name = Applications_Building",
+        "service_description = Test-int-downtime"
+        ]
+        }
+     */
     include_once("header.php");
     $confFile=$_POST['dwt_conf'];
     $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
