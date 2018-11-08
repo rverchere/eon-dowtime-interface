@@ -62,6 +62,7 @@ function createTableList($yamlConfPath){
             </b></td>';
         echo '<td><input type="hidden" class="inp_hidden" name="dwt_conf" value="'.$confFile.'"/></td>';
         echo '<td class=td_line><input type="submit" name="dwt_submit" class="dwt_submit" value="validate"/></td>';
+        echo '<td class=td_line><input type="submit" name="dwt_get" class="dwt_get" value="get"/></td>';
         echo '</tr>';
         $fileCount++;
     }
@@ -99,11 +100,13 @@ function thrukGetDowntimes($server) {
 function thrukGetServiceDowntime($server, $servername, $servicename) {
     $ch = curl_init('https://'.$server.'/thruk/r/downtimes');
     $results = thrukCurl($ch);
+    $services = [];
     foreach ($results as $result) {
         if (($result['host_name'] == $servername) && ($result['service_description']) == $servicename) {
-            return $result;
+            array_push($services, $result);
         }
     }
+    return($services);
 }
 
 function thrukGetHostDowntime($server, $servername) {

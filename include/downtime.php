@@ -54,4 +54,22 @@ if ($_POST['dwt_submit']) {
         }
     }
 }
+
+if($_POST['dwt_get']) {
+    $confFile=$_POST['dwt_conf'];
+    $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
+
+    foreach ($yamlFile['app'] as $app) {
+        $appHostName=$app['host'];
+        $appName=$app['service'];
+        $result = thrukGetServiceDowntime($dwt_dest_srv, $appHostName, $appName, $details);
+            if ($result==null) {
+                echo "Cannot get downtime for application ".$appName." <br/>";
+                return -1;
+            } else {
+                echo "Downtime get for application ".$appName." <br/>";
+                print_r($result);
+            }
+    }
+}
 ?>
