@@ -38,10 +38,8 @@
         return -1;
     }
 
-    $commments = $argv[2];
-    $start_time = $argv[3];
-    $end_time = $argv[4];
     $hostname = $argv[5];
+
 
     if(isset($argv[6])) {
         $servicename = $argv[6];
@@ -49,7 +47,15 @@
         $servicename = '';
     }
 
-    $result = thrukSetDowntime($server, $hostname, $servicename, '');
+    $details = [
+        'comment_data' => $argv[2],
+        'start_time' => $argv[3],
+        'end_time' => $argv[4],
+        'fixed' => 1,
+        'comment_author' => 'Mr. Robot'
+    ];
+
+    $result = thrukSetDowntime($server, $hostname, $servicename, $details);
     if ($result==null) {
         echo "Cannot set downtime for ".$hostname."\n";
         return -1;

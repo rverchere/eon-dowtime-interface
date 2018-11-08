@@ -95,8 +95,8 @@ function thrukSetDowntime($server, $hostname, $servicename, $details) {
     * - duration (optionnal)
     * - comment_author (optionnal)
     */
-    if($details =='') {
-        $fields = [
+    if($details == '') {
+        $details = [
             'comment_data' => 'PHP Test',
             'comment_author' => 'Me'
         ];
@@ -118,7 +118,7 @@ function thrukSetDowntime($server, $hostname, $servicename, $details) {
     curl_setopt($ch, CURLOPT_COOKIE, $cookies);
 
     curl_setopt($ch, CURLOPT_POST, true );
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $details);
 
     $output = curl_exec($ch);
     $rcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
