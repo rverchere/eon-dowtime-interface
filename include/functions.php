@@ -62,7 +62,10 @@ function createTableList($yamlConfPath){
                 </div>
             </b></td>';
         echo '<td><input type="hidden" class="inp_hidden" name="dwt_conf" value="'.$confFile.'"/></td>';
-        echo '<td class="td_line  t_actions"><input type="submit" name="dwt_submit" class="btn btn-sm btn-primary dwt_button" value="validate"/></td>';
+        echo '<td class="td_line  t_actions">';
+        echo '<input type="submit" name="dwt_submit" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.valid").'"/>';
+        echo '<input type="submit" name="dwt_get" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.get").'"/>';
+        echo '</td>';
         echo '</tr>';
         $fileCount++;
     }
@@ -78,9 +81,10 @@ function thrukCurl($ch) {
     curl_close($ch);
 
     if($rcode == 200) {
-        return json_decode($output);
+        return json_decode($output, true);
     }
 }
+
 function thrukGetHost($server, $hostname) {
     $ch = curl_init('https://'.$server.'/thruk/r/hosts/'.$hostname);
     return thrukCurl($ch);
@@ -90,9 +94,26 @@ function thrukGetService($server, $hostname, $service) {
     $ch = curl_init('https://'.$server.'/thruk/r/services/'.$hostname.'/'.$service);
     return thrukCurl($ch);
 }
+
 function thrukGetDowntimes($server) {
     $ch = curl_init('https://'.$server.'/thruk/r/downtimes');
     return thrukCurl($ch);
+}
+
+function thrukGetServiceDowntime($server, $servername, $servicename) {
+    $ch = curl_init('https://'.$server.'/thruk/r/downtimes');
+    $results = thrukCurl($ch);
+    $services = [];
+    foreach ($results as $result) {
+        if (($result['host_name'] == $servername) && ($result['service_description']) == $servicename) {
+            array_push($services, $result);
+        }
+    }
+    return($services);
+}
+
+function thrukGetHostDowntime($server, $servername) {
+    return thrukGetServiceDowntime($server, $servername, '');
 }
 
 function thrukSetDowntime($server, $hostname, $servicename, $details) {

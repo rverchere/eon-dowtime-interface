@@ -382,6 +382,8 @@
 	"label.tools": "Outils",
 	"label.user": "Utilisateur",
 	"label.users_views": "Vues utilisateurs",
+	"label.users_downtime.button.action.get": "Voir les existants",
+	"label.users_downtime.button.action.valid": "Appliquer",
 	"label.users_downtime.title": "Déclaration des maintenances applicatives",
 	"label.users_downtime.tablehead.app": "Applications",
 	"label.users_downtime.tablehead.desc": "Cause de la maintenance",

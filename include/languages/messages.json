@@ -382,6 +382,8 @@
 	"label.tools": "Tools",
 	"label.user": "User",
 	"label.users_views": "Users views",
+	"label.users_downtime.button.action.get": "View existings",
+	"label.users_downtime.button.action.valid": "Apply",
 	"label.users_downtime.title": "Applications downtime declaration",
 	"label.users_downtime.tablehead.app": "Applications",
 	"label.users_downtime.tablehead.desc": "Downtime cause",
