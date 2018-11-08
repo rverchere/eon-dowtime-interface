@@ -40,17 +40,21 @@
 
     $hostname = $argv[5];
 
-    // CHeck if host exists
+    // Check if host exists
     $result = thrukGetHost($argv[1], $argv[5]);
     if ($result == null) {
         echo "Cannot get host\n";
         return -1;
-    } else {
-        print_r($result);
     }
 
     if(isset($argv[6])) {
         $servicename = $argv[6];
+        // Check if service exists
+        $result = thrukGetService($argv[1], $argv[5], $argv[6]);
+        if ($result == null) {
+            echo "Cannot get service\n";
+            return -1;
+        }
     } else {
         $servicename = '';
     }

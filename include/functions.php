@@ -67,10 +67,8 @@ function createTableList($yamlConfPath){
     echo '</tr>';
 }
 
-function thrukGetHost($server, $hostname) {
+function thrukCurl($ch) {
     $cookies = "user_name=admin; session_id=169014757; user_id=1; group_id=1; user_limitation=0";
-    $ch = curl_init('https://'.$server.'/thruk/r/hosts/'.$hostname);
-
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_COOKIE, $cookies);
     $output = curl_exec($ch);
@@ -81,20 +79,18 @@ function thrukGetHost($server, $hostname) {
         return json_decode($output);
     }
 }
+function thrukGetHost($server, $hostname) {
+    $ch = curl_init('https://'.$server.'/thruk/r/hosts/'.$hostname);
+    return thrukCurl($ch);
+}
 
+function thrukGetService($server, $hostname, $service) {
+    $ch = curl_init('https://'.$server.'/thruk/r/services/'.$hostname.'/'.$service);
+    return thrukCurl($ch);
+}
 function thrukGetDowntimes($server) {
-    $cookies = "user_name=admin; session_id=169014757; user_id=1; group_id=1; user_limitation=0";
     $ch = curl_init('https://'.$server.'/thruk/r/downtimes');
-
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_COOKIE, $cookies);
-    $output = curl_exec($ch);
-    $rcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-
-    if($rcode == 200) {
-        return json_decode($output);
-    }
+    return thrukCurl($ch);
 }
 
 function thrukSetDowntime($server, $hostname, $servicename, $details) {
@@ -115,8 +111,6 @@ function thrukSetDowntime($server, $hostname, $servicename, $details) {
         ];
     }
 
-    $cookies = "user_name=admin; session_id=169014757; user_id=1; group_id=1; user_limitation=0";
-
     if ($servicename != '') {
         // if service name is defined, set downtime for this service
         $url = 'https://'.$server.'/thruk/r/services/'.$hostname.'/'.$servicename.'/cmd/schedule_svc_downtime';
@@ -126,20 +120,9 @@ function thrukSetDowntime($server, $hostname, $servicename, $details) {
     }
 
     $ch = curl_init($url);
-
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_COOKIE, $cookies);
-
     curl_setopt($ch, CURLOPT_POST, true );
     curl_setopt($ch, CURLOPT_POSTFIELDS, $details);
-
-    $output = curl_exec($ch);
-    $rcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-
-    if($rcode == 200) {
-        return json_decode($output);
-    }
+    return thrukCurl($ch);
 }
 
 ?>
