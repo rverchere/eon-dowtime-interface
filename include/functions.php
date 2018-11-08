@@ -60,6 +60,7 @@ function createTableList($yamlConfPath){
                     </script>
                 </div>
             </b></td>';
+        echo '<td><input type="hidden" class="inp_hidden" name="dwt_conf" value="'.$confFile.'"/></td>';
         echo '<td class=td_line><input type="submit" name="dwt_submit" class="dwt_submit" value="validate"/></td>';
         echo '</tr>';
         $fileCount++;

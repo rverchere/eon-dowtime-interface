@@ -20,6 +20,6 @@ $path_messages_custom="$path_languages/custom.messages";
 $path_yaml_app_conf="$path_eonweb/app_configs";
 
 $dwt_author='Robot';
-$dwt_dest_srv='10.1.0.41';
+$dwt_dest_srv='monitor01.nimes.fr';
 
 ?>
