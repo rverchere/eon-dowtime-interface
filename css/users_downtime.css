@@ -1,0 +1,72 @@
+body
+{
+    width: 80%;
+    height: 100%;
+    margin-top: 50px;
+}
+
+table
+{
+    width: 100%;
+}
+tr
+{
+    width: inherit;
+}
+th
+{
+    background-color: #286090;
+    color: #fff;
+    height: 3em;
+}
+th.t_appname
+{
+    text-align: center;
+
+}
+.t_appname
+{
+    width: 300px;
+}
+
+th.t_desc
+{
+    text-align: center;
+
+}
+.t_desc
+{
+    width: auto;
+}
+
+th.t_starttime
+{
+    text-align: center;
+
+}
+.t_starttime,.t_endtime
+{
+    width: 200px;
+}
+
+th.t_endtime
+{
+    text-align: center;
+
+}
+
+.t_actions
+{
+    width: 80px;
+    margin: 0;
+}
+
+td.t_actions
+{
+    align: center;
+}
+
+.dwt_button
+{
+    height: 34px;
+}

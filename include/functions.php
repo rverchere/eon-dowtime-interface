@@ -27,17 +27,18 @@ function createTableList($yamlConfPath){
     $fileCount=1;
     $pickerCount=1;
     echo '<tr class="tr_head">';
-    echo '<td class="td_head">'.getLabel("label.users_downtime.tablehead.app").'</td>';
-    echo '<td class="td_head">'.getLabel("label.users_downtime.tablehead.desc").'</td>';
-    echo '<td class="td_head">'.getLabel("label.users_downtime.tablehead.starttime").'</td>';
-    echo '<td class="td_head">'.getLabel("label.users_downtime.tablehead.endtime").'</td>';
-    echo '<td class="td_head"></td>';
+    echo '<th class="th_head col-md-1 t_appname">'.getLabel("label.users_downtime.tablehead.app").'</th>';
+    echo '<th class="th_head sorting t_desc">'.getLabel("label.users_downtime.tablehead.desc").'</th>';
+    echo '<th class="th_head sorting t_starttime">'.getLabel("label.users_downtime.tablehead.starttime").'</th>';
+    echo '<th class="th_head sorting t_endtime">'.getLabel("label.users_downtime.tablehead.endtime").'</th>';
+    echo '<th></th>';
+    echo '<th class="th_head t_actions"></th>';
     echo '</tr>';
     foreach($confPath as $confFile) {
         $yamlFile=yaml_parse_file($yamlConfPath.'/'.$confFile);
-        echo '<td class=td_line>'.$yamlFile["displayname"].'</td>';
-        echo '<td class=td_line><input type="text" name="dwt_desc" class="dwt_desc"/></td>';
-        echo '<td class=td_line><b>
+        echo '<td class="td_line col-md-1 t_appname">'.$yamlFile["displayname"].'</td>';
+        echo '<td class="td_line sorting t_desc"><input type="text" name="dwt_desc" class="form-control"/></td>';
+        echo '<td class="td_line sorting t_starttime"><b>
                 <div class="input-group date startdate" id="datetimepicker'.$fileCount.$pickerCount.'">
                     <input type="text" class="form-control" name="startdate" />
                     <span class="input-group-addon">
@@ -49,7 +50,7 @@ function createTableList($yamlConfPath){
                 </div>
             </b></td>';
         $pickerCount++;
-        echo '<td class=td_line><b>
+        echo '<td class="td_line sorting t_endtime"><b>
                 <div class="input-group date enddate" id="datetimepicker'.$fileCount.$pickerCount.'">
                     <input type="text" class="form-control" name="enddate" />
                     <span class="input-group-addon">
@@ -61,7 +62,7 @@ function createTableList($yamlConfPath){
                 </div>
             </b></td>';
         echo '<td><input type="hidden" class="inp_hidden" name="dwt_conf" value="'.$confFile.'"/></td>';
-        echo '<td class=td_line><input type="submit" name="dwt_submit" class="dwt_submit" value="validate"/></td>';
+        echo '<td class="td_line  t_actions"><input type="submit" name="dwt_submit" class="btn btn-sm btn-primary dwt_button" value="validate"/></td>';
         echo '</tr>';
         $fileCount++;
     }
