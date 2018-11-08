@@ -81,8 +81,6 @@ function thrukGetDowntimes($server) {
 
     if($rcode == 200) {
         return $output;
-    } else {
-        return"ERROR\n";
     }
 }
 
@@ -128,8 +126,6 @@ function thrukSetDowntime($server, $hostname, $servicename, $details) {
 
     if($rcode == 200) {
         return $output;
-    } else {
-        return"ERROR\n";
     }
 }
 
