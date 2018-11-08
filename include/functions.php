@@ -68,6 +68,20 @@ function createTableList($yamlConfPath){
     echo '</tr>';
 }
 
+function thrukGetHost($server, $hostname) {
+    $cookies = "user_name=admin; session_id=169014757; user_id=1; group_id=1; user_limitation=0";
+    $ch = curl_init('https://'.$server.'/thruk/r/hosts/'.$hostname);
+
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_COOKIE, $cookies);
+    $output = curl_exec($ch);
+    $rcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if($rcode == 200) {
+        return json_decode($output);
+    }
+}
 
 function thrukGetDowntimes($server) {
     $cookies = "user_name=admin; session_id=169014757; user_id=1; group_id=1; user_limitation=0";
@@ -80,7 +94,7 @@ function thrukGetDowntimes($server) {
     curl_close($ch);
 
     if($rcode == 200) {
-        return $output;
+        return json_decode($output);
     }
 }
 
@@ -125,7 +139,7 @@ function thrukSetDowntime($server, $hostname, $servicename, $details) {
     curl_close($ch);
 
     if($rcode == 200) {
-        return $output;
+        return json_decode($output);
     }
 }
 

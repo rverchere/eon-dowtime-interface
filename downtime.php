@@ -23,11 +23,11 @@
     // if only eon server as parameter, get downtimes
     if($argc < 3) {
         $result = thrukGetDowntimes($argv[1]);
-        if ($result==null) {
+        if ($result == null) {
             echo "Cannot get downtimes\n";
             return -1;
         } else {
-            echo $result;
+            print_r($result);
         }
         return 0;
     }
@@ -40,6 +40,14 @@
 
     $hostname = $argv[5];
 
+    // CHeck if host exists
+    $result = thrukGetHost($argv[1], $argv[5]);
+    if ($result == null) {
+        echo "Cannot get host\n";
+        return -1;
+    } else {
+        print_r($result);
+    }
 
     if(isset($argv[6])) {
         $servicename = $argv[6];
@@ -60,7 +68,7 @@
         echo "Cannot set downtime for ".$hostname."\n";
         return -1;
     } else {
-        echo $result;
+        print_r($result);
     }
     return 0;
 
