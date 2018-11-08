@@ -77,7 +77,7 @@ function thrukCurl($ch) {
     curl_close($ch);
 
     if($rcode == 200) {
-        return json_decode($output);
+        return json_decode($output, true);
     }
 }
 function thrukGetHost($server, $hostname) {
