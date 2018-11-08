@@ -17,6 +17,9 @@ $path_logo_navbar_custom="$path_images/custom.logo-navbar.png";
 $path_languages="$path_eonweb/include/languages";
 $path_messages="$path_languages/messages";
 $path_messages_custom="$path_languages/custom.messages";
+$path_yaml_app_conf="$path_eonweb/app_configs";
 
-$path_yaml_app_conf="$path_eonweb/app_configs"
+$dwt_author='Robot';
+$dwt_dest_srv='10.1.0.41';
+
 ?>

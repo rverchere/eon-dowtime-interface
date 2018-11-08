@@ -26,7 +26,6 @@ function createTableList($yamlConfPath){
     $confPath = preg_grep('/^([^.])/', scandir($yamlConfPath));
     $fileCount=1;
     $pickerCount=1;
-
     echo '<tr class="tr_head">';
     echo '<td class="td_head">'.getLabel("label.users_downtime.tablehead.app").'</td>';
     echo '<td class="td_head">'.getLabel("label.users_downtime.tablehead.desc").'</td>';
@@ -40,7 +39,7 @@ function createTableList($yamlConfPath){
         echo '<td class=td_line><input type="text" name="dwt_desc" class="dwt_desc"/></td>';
         echo '<td class=td_line><b>
                 <div class="input-group date startdate" id="datetimepicker'.$fileCount.$pickerCount.'">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="startdate" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -52,7 +51,7 @@ function createTableList($yamlConfPath){
         $pickerCount++;
         echo '<td class=td_line><b>
                 <div class="input-group date enddate" id="datetimepicker'.$fileCount.$pickerCount.'">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="enddate" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
