@@ -10,68 +10,18 @@ table
 {
     width: 100%;
 }
-tr
-{
-    width: inherit;
-}
-th.t_appname {
-    border-radius: 3px 0px 0px 3px;
-}
-th.t_actions {
-    border-radius: 0px 5px 3px 0px;
-}
-th
-{
-    background-color: #286090;
-    color: #fff;
-    height: 3em;
-}
-th.t_appname
-{
-    text-align: center;
-
-}
 .t_appname
 {
     width: 300px;
-}
-
-th.t_desc
-{
-    text-align: center;
-
 }
 .t_desc
 {
     width: auto;
 }
-
-td.t_desc
-{
-    padding: 10px;
-}
-
-th.t_starttime
-{
-    text-align: center;
-
-}
 .t_starttime,.t_endtime
 {
     width: 210px;
 }
-
-td.t_starttime,td.t_endtime
-{
-    padding: 5px;
-}
-
-th.t_endtime
-{
-    text-align: center;
-
-}
-
 .t_actions
 {
     width: 150px;
@@ -79,14 +29,59 @@ th.t_endtime
     text-align: center;
     padding: 10px;
 }
-
-td.t_actions
-{
-    align: center;
-}
-
 .dwt_button
 {
     height: 34px;
     width: 130px;
+}
+
+tr
+{
+    width: inherit;
+}
+
+th
+{
+    background-color: #286090;
+    color: #fff;
+    height: 3em;
+}
+th.t_appname {
+    border-radius: 3px 0px 0px 3px;
+}
+th.t_actions {
+    border-radius: 0px 5px 3px 0px;
+}
+th.t_appname
+{
+    text-align: center;
+
+}
+th.t_desc
+{
+    text-align: center;
+
+}
+th.t_starttime
+{
+    text-align: center;
+
+}
+th.t_endtime
+{
+    text-align: center;
+
+}
+
+td.t_desc
+{
+    padding: 10px;
+}
+td.t_starttime,td.t_endtime
+{
+    padding: 5px;
+}
+td.t_actions
+{
+    align: center;
 }
