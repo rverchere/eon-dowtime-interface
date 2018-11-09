@@ -59,19 +59,6 @@ if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
 }
 
 if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
-    /*
-        EON API REQUEST
-        POST https://localhost/eonapi/listNagiosObjects?&username=admin&apiKey=xxxx
-       {
-        "object": "downtimes",
-        "columns": ["host_name", "service_description", "comment", "entry_time", "start_time", "end_time"],
-        "backendid": "0",
-        "filters": [
-        "host_name = Applications_Building",
-        "service_description = Test-int-downtime"
-        ]
-        }
-     */
     $confFile=$_POST['dwt_conf'];
     $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
     echo '<table>';
@@ -86,12 +73,12 @@ if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
     foreach ($yamlFile['app'] as $app) {
         $appHostName=$app['host'];
         $appName=$app['service'];
-        $result = thrukGetServiceDowntime($dwt_dest_srv, $appHostName, $appName);
+        $result = eonGetServiceDowntime($dwt_dest_srv, $appHostName, $appName);
         if ($result==null) {
             echo "Cannot get downtime for application ".$appName." <br/>";
             return -1;
         } else {
-            foreach($result as $r) {
+            foreach($result['result']['default'] as $r) {
                 echo '<tr>';
                 echo '<td class="td_line col-md-1 t_appname">'.$appName.'</td>';
                 echo '<td class="td_line col-md-1 t_comment">'.$r['comment'].'</td>';

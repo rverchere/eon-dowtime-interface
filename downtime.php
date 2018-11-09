@@ -22,7 +22,7 @@
 
     // if only eon server as parameter, get downtimes
     if($argc < 3) {
-        $result = thrukGetDowntimes($argv[1]);
+        $result = eonGetDowntimes($argv[1]);
         if ($result == null) {
             echo "Cannot get downtimes\n";
             return -1;

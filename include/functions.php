@@ -74,6 +74,7 @@ function createTableList($yamlConfPath){
     echo '</tr>';
 }
 
+
 function thrukCurl($ch) {
     global $eon_cookies;
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -150,9 +151,64 @@ function thrukSetDowntime($server, $hostname, $servicename, $details) {
     return thrukCurl($ch);
 }
 
+function eonGetDowntimes($server, $filters = []) {
+    /*
+    EON API REQUEST
+    POST https://localhost/eonapi/listNagiosObjects?&username=admin&apiKey=xxxx
+    {
+    "object": "downtimes",
+    "columns": ["host_name", "service_description", "comment", "entry_time", "start_time", "end_time"],
+    "backendid": "0",
+    "filters": [
+    "host_name = Applications_Building",
+    "service_description = Test-int-downtime"
+    ]
+    }
+     */
+    global $eon_username;
+    global $eon_apikey;
+    $details = array(
+        "object" => "downtimes",
+        "columns" => ["host_name",
+                    "service_description",
+                    "comment",
+                    "entry_time",
+                    "start_time",
+                    "end_time"],
+        "backendid"=> "0",
+        "filters" => $filters
+    );
+    $url ='https://'.$server.'/eonapi/listNagiosObjects?&username='.$eon_username.'&apiKey='.$eon_apikey;
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, true );
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($details));
+    $output = curl_exec($ch);
+    $rcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    if($rcode == 200) {
+        return json_decode($output, true);
+    }
+}
+
+function eonGetServerDowntime($server, $servername) {
+    $filters = [
+        "host_name = ".$servername.""
+    ];
+    return eonGetDowntimes($server, $filters);
+}
+
+function eonGetServiceDowntime($server, $servername, $servicename) {
+    $filters = [
+        "host_name = ".$servername."",
+        "service_description = ".$servicename.""
+    ];
+    return eonGetDowntimes($server, $filters);
+}
+
 function epochToDateTime($epoch) {
-    $dt = new DateTime("@$epoch");  // convert UNIX timestamp to PHP DateTime
-    return $dt->format('Y-m-d H:i:s'); // output = 2017-01-01 00:00:00    
+    $dt = new DateTime("@$epoch");
+    return $dt->format('Y-m-d H:i:s');
 }
 
 ?>
