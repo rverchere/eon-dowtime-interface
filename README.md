@@ -83,3 +83,25 @@ This file should contain the ensemble of next's informations :
       - uptime
     propagation_enfants: true/false
 ```
+
+## Docker
+
+A Dockerfile is provided to run php application in a container.
+
+The container uses php image base plus:
+- curl
+- yaml
+
+### Build
+
+```
+$ docker build -t eon-downtime-php .
+```
+
+### Run
+
+Just map the current working dir to `/var/www/html`. `EON_APIKEY` has to be set as environment variable to access to EON API.
+
+```
+$ docker run -d -p 1080:80 --name eon-downtime-php -d -e EON_APIKEY="my_api_key" -v "$PWD":/var/www/html eon-downtime-php
+```
