@@ -394,6 +394,7 @@
 	"label.users_downtime.tablehead.hosts": "Hosts",
 	"label.users_downtime.tablehead.host": "Host",
 	"label.users_downtime.tablehead.service": "Service",
+	"label.users_downtime.tablehead.child": "Propagate to Children",
 	"label.using_filter": "using filter",
 	"label.yes": "yes",
 	"label.yesterday": "Yesterday",
