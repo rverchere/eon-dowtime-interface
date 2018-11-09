@@ -1,6 +1,6 @@
 <?php
-include("config.php");
-include("functions.php");
+include_once("config.php");
+include_once("functions.php");
 
 if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
     $desc=$_POST['dwt_desc'];

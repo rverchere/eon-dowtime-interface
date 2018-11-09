@@ -21,5 +21,6 @@ $path_yaml_app_conf="$path_eonweb/app_configs";
 
 $dwt_author='Robot';
 $dwt_dest_srv='monitor01.nimes.fr';
+$eon_cookies="user_name=admin; session_id=169014757; user_id=1; group_id=1; user_limitation=0";
 
 ?>

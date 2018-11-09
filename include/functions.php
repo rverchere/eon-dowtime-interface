@@ -1,5 +1,6 @@
 <?php
-include("classes/Translator.class.php");
+include_once("classes/Translator.class.php");
+include_once("config.php");
 
 function getLabel($reference){
     global $dictionnary;
@@ -73,9 +74,9 @@ function createTableList($yamlConfPath){
 }
 
 function thrukCurl($ch) {
-    $cookies = "user_name=admin; session_id=169014757; user_id=1; group_id=1; user_limitation=0";
+    global $eon_cookies;
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_COOKIE, $cookies);
+    curl_setopt($ch, CURLOPT_COOKIE, $eon_cookies);
     $output = curl_exec($ch);
     $rcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
