@@ -81,8 +81,6 @@ if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
     echo '<th class="th_head sorting t_endtime">'.getLabel("label.users_downtime.tablehead.entrytime").'</th>';
     echo '<th class="th_head sorting t_starttime">'.getLabel("label.users_downtime.tablehead.starttime").'</th>';
     echo '<th class="th_head sorting t_endtime">'.getLabel("label.users_downtime.tablehead.endtime").'</th>';
-    echo '<th></th>';
-    echo '<th class="th_head t_actions"></th>';
     echo '</tr>';
 
     foreach ($yamlFile['app'] as $app) {
@@ -111,41 +109,55 @@ if (isset($_POST['dwt_config']) && $_POST['dwt_config']) {
 
     $confFile=$_POST['dwt_conf'];
     $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
+    echo '<h3 class="page-header">'.$yamlFile['displayname'].'</h3>';
+
+    // list applications (yaml app part)
+    echo '<div>';
+    echo '<h4 class="page-header">'.getLabel("label.users_downtime.tablehead.app").'</h4>';
     echo '<table>';
     echo '<tr class="tr_head">';
-    echo '<th class="th_head col-md-1 t_appname">'.getLabel("label.users_downtime.tablehead.app").'</th>';
-    echo '<th class="th_head sorting t_desc">'.getLabel("label.users_downtime.tablehead.desc").'</th>';
-    echo '<th class="th_head sorting t_endtime">'.getLabel("label.users_downtime.tablehead.entrytime").'</th>';
-    echo '<th class="th_head sorting t_starttime">'.getLabel("label.users_downtime.tablehead.starttime").'</th>';
-    echo '<th class="th_head sorting t_endtime">'.getLabel("label.users_downtime.tablehead.endtime").'</th>';
-    echo '<th></th>';
-    echo '<th class="th_head t_actions"></th>';
+    echo '<th class="th_head sorting t_host">'.getLabel("label.users_downtime.tablehead.host").'</th>';
+    echo '<th class="th_head sorting t_service">'.getLabel("label.users_downtime.tablehead.service").'</th>';
     echo '</tr>';
 
     foreach ($yamlFile['app'] as $app) {
-        $appHostName=$app['host'];
-        $appName=$app['service'];
-        $result = thrukGetServiceDowntime($dwt_dest_srv, $appHostName, $appName);
-            if ($result==null) {
-                echo "Cannot get downtime for application ".$appName." <br/>";
-                return -1;
-            } else {
-                foreach($result as $r) {
-                    echo '<tr>';
-                    echo '<td class="td_line col-md-1 t_appname">'.$appName.'</td>';
-                    echo '<td class="td_line col-md-1 t_comment">'.$r['comment'].'</td>';
-                    echo '<td class="td_line col-md-1 t_entrytime">'.epochToDateTime($r['entry_time']).'</td>';
-                    echo '<td class="td_line col-md-1 t_starttime">'.epochToDateTime($r['start_time']).'</td>';
-                    echo '<td class="td_line col-md-1 t_endtime">'.epochToDateTime($r['end_time']).'</td>';
-                    echo '</tr><br/>';
-                }
-            }
+        $host=$app['host'];
+        $service=$app['service'];
+        echo '<tr>';
+        echo '<td class="td_line col-md-1 t_host">'.$host.'</td>';
+        echo '<td class="td_line col-md-1 t_service">'.$service.'</td>';
+        echo '</tr><br/>';
     }
     echo '</table>';
+    echo '</div>';
 
+    // list servers (yaml app part)
+    echo '<div>';
+    echo '<h4 class="page-header">'.getLabel("label.users_downtime.tablehead.hosts").'</h4>';
+    echo '<table>';
+    echo '<tr class="tr_head">';
+    echo '<th class="th_head sorting t_host">'.getLabel("label.users_downtime.tablehead.host").'</th>';
+    echo '<th class="th_head sorting t_service">'.getLabel("label.users_downtime.tablehead.service").'</th>';
+    echo '<th class="th_head sorting t_child">'.getLabel("label.users_downtime.tablehead.child").'</th>';
+    echo '</tr>';
+
+    foreach ($yamlFile['hosts'] as $hosts) {
+        $host=$hosts['host'];
+        $service=implode(", ", $hosts['services']);
+        if($hosts['propagation_childs']){
+            $child='1';
+        } else {
+            $child='0';
+        }
+        echo '<tr>';
+        echo '<td class="td_line col-md-1 t_host">'.$host.'</td>';
+        echo '<td class="td_line col-md-1 t_service">'.$service.'</td>';
+        echo '<td class="td_line col-md-1 t_child">'.$child.'</td>';
+        echo '</tr><br/>';
+    }
+    echo '</table>';
+    echo '</div>';
 }
 include_once("footer.php");
-
-?>
 
 ?>
