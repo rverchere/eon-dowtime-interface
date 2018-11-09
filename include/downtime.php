@@ -1,6 +1,9 @@
 <?php
 include_once("config.php");
 include_once("functions.php");
+include_once("header.php");
+
+echo '<h2 class="page-header">'.getLabel("label.users_downtime.title").'</h2>';
 
 if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
     $desc=$_POST['dwt_desc'];
@@ -69,10 +72,45 @@ if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
         ]
         }
      */
-    include_once("header.php");
     $confFile=$_POST['dwt_conf'];
     $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
-    echo '<h2 class="page-header">'.getLabel("label.users_downtime.title").'</h2>';
+    echo '<table>';
+    echo '<tr class="tr_head">';
+    echo '<th class="th_head col-md-1 t_appname">'.getLabel("label.users_downtime.tablehead.app").'</th>';
+    echo '<th class="th_head sorting t_desc">'.getLabel("label.users_downtime.tablehead.desc").'</th>';
+    echo '<th class="th_head sorting t_endtime">'.getLabel("label.users_downtime.tablehead.entrytime").'</th>';
+    echo '<th class="th_head sorting t_starttime">'.getLabel("label.users_downtime.tablehead.starttime").'</th>';
+    echo '<th class="th_head sorting t_endtime">'.getLabel("label.users_downtime.tablehead.endtime").'</th>';
+    echo '<th></th>';
+    echo '<th class="th_head t_actions"></th>';
+    echo '</tr>';
+
+    foreach ($yamlFile['app'] as $app) {
+        $appHostName=$app['host'];
+        $appName=$app['service'];
+        $result = thrukGetServiceDowntime($dwt_dest_srv, $appHostName, $appName);
+        if ($result==null) {
+            echo "Cannot get downtime for application ".$appName." <br/>";
+            return -1;
+        } else {
+            foreach($result as $r) {
+                echo '<tr>';
+                echo '<td class="td_line col-md-1 t_appname">'.$appName.'</td>';
+                echo '<td class="td_line col-md-1 t_comment">'.$r['comment'].'</td>';
+                echo '<td class="td_line col-md-1 t_entrytime">'.epochToDateTime($r['entry_time']).'</td>';
+                echo '<td class="td_line col-md-1 t_starttime">'.epochToDateTime($r['start_time']).'</td>';
+                echo '<td class="td_line col-md-1 t_endtime">'.epochToDateTime($r['end_time']).'</td>';
+                echo '</tr><br/>';
+            }
+        }
+    }
+    echo '</table>';
+}
+
+if (isset($_POST['dwt_config']) && $_POST['dwt_config']) {
+
+    $confFile=$_POST['dwt_conf'];
+    $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
     echo '<table>';
     echo '<tr class="tr_head">';
     echo '<th class="th_head col-md-1 t_appname">'.getLabel("label.users_downtime.tablehead.app").'</th>';
@@ -103,9 +141,11 @@ if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
                 }
             }
     }
-
     echo '</table>';
 
-    include_once("footer.php");
 }
+include_once("footer.php");
+
+?>
+
 ?>
