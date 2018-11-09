@@ -143,12 +143,18 @@ if (isset($_POST['dwt_config']) && $_POST['dwt_config']) {
 
     foreach ($yamlFile['hosts'] as $hosts) {
         $host=$hosts['host'];
-        $service=implode(", ", $hosts['services']);
+        if (isset($hosts['services'])) {
+            $service=implode(", ", $hosts['services']);
+        } else {
+            $service='-';
+        }
+
         if($hosts['propagation_childs']){
             $child='1';
         } else {
             $child='0';
         }
+
         echo '<tr>';
         echo '<td class="td_line col-md-1 t_host">'.$host.'</td>';
         echo '<td class="td_line col-md-1 t_service">'.$service.'</td>';
