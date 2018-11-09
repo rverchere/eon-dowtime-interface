@@ -18,9 +18,10 @@ table
 {
     width: auto;
 }
-.t_starttime,.t_endtime
+.t_starttime,.t_endtime,.t_entrytime
 {
     width: 210px;
+    text-align: center;
 }
 .t_actions
 {
@@ -34,6 +35,19 @@ table
     height: 34px;
     width: 130px;
 }
+.tv_appname
+{
+    max-width: 150px;
+}
+.tv_desc
+{
+    width: auto;
+}
+.tv_starttime,.tv_endtime,.tv_entrytime
+{
+    max-width: 130px;
+    text-align: center;
+}
 
 tr
 {
@@ -45,32 +59,16 @@ th
     background-color: #286090;
     color: #fff;
     height: 3em;
+    text-align: center;
 }
-th.t_appname {
+th.t_appname,th.tv_appname {
     border-radius: 3px 0px 0px 3px;
 }
 th.t_actions {
     border-radius: 0px 5px 3px 0px;
 }
-th.t_appname
-{
-    text-align: center;
-
-}
-th.t_desc
-{
-    text-align: center;
-
-}
-th.t_starttime
-{
-    text-align: center;
-
-}
-th.t_endtime
-{
-    text-align: center;
-
+th.tv_endtime {
+    border-radius: 0px 5px 3px 0px;
 }
 
 td.t_desc

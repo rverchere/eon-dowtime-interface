@@ -63,11 +63,11 @@ if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
     $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
     echo '<table>';
     echo '<tr class="tr_head">';
-    echo '<th class="th_head col-md-1 t_appname">'.getLabel("label.users_downtime.tablehead.app").'</th>';
-    echo '<th class="th_head sorting t_desc">'.getLabel("label.users_downtime.tablehead.desc").'</th>';
-    echo '<th class="th_head sorting t_endtime">'.getLabel("label.users_downtime.tablehead.entrytime").'</th>';
-    echo '<th class="th_head sorting t_starttime">'.getLabel("label.users_downtime.tablehead.starttime").'</th>';
-    echo '<th class="th_head sorting t_endtime">'.getLabel("label.users_downtime.tablehead.endtime").'</th>';
+    echo '<th class="th_head col-md-1 tv_appname">'.getLabel("label.users_downtime.tablehead.app").'</th>';
+    echo '<th class="th_head sorting tv_desc">'.getLabel("label.users_downtime.tablehead.desc").'</th>';
+    echo '<th class="th_head sorting tv_entrytime">'.getLabel("label.users_downtime.tablehead.entrytime").'</th>';
+    echo '<th class="th_head sorting tv_starttime">'.getLabel("label.users_downtime.tablehead.starttime").'</th>';
+    echo '<th class="th_head sorting tv_endtime">'.getLabel("label.users_downtime.tablehead.endtime").'</th>';
     echo '</tr>';
 
     foreach ($yamlFile['app'] as $app) {
@@ -80,11 +80,11 @@ if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
         } else {
             foreach($result['result']['default'] as $r) {
                 echo '<tr>';
-                echo '<td class="td_line col-md-1 t_appname">'.$appName.'</td>';
-                echo '<td class="td_line col-md-1 t_comment">'.$r['comment'].'</td>';
-                echo '<td class="td_line col-md-1 t_entrytime">'.epochToDateTime($r['entry_time']).'</td>';
-                echo '<td class="td_line col-md-1 t_starttime">'.epochToDateTime($r['start_time']).'</td>';
-                echo '<td class="td_line col-md-1 t_endtime">'.epochToDateTime($r['end_time']).'</td>';
+                echo '<td class="td_line col-md-1 tv_appname"><h4>'.$appName.'</h4></td>';
+                echo '<td class="td_line col-md-1 tv_comment">'.$r['comment'].'</td>';
+                echo '<td class="td_line col-md-1 tv_entrytime">'.epochToDateTime($r['entry_time']).'</td>';
+                echo '<td class="td_line col-md-1 tv_starttime">'.epochToDateTime($r['start_time']).'</td>';
+                echo '<td class="td_line col-md-1 tv_endtime">'.epochToDateTime($r['end_time']).'</td>';
                 echo '</tr><br/>';
             }
         }
