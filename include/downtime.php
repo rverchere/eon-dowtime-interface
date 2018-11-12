@@ -87,6 +87,7 @@ if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
                 echo '<td class="td_line sorting tv_endtime">'.epochToDateTime($details["end_time"]).'</td>';
                 echo '<td class="td_line sorting ts_status">'.$status.'</td>';
                 echo '</tr>';
+                $svcSet='yes';
                 if ($status=='failed') { return -1; }
             }
         }
@@ -99,6 +100,9 @@ if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
             $status=getLabel("label.users_downtime.set.app.status.success");
             $state='success';
         }
+        if ( $svcSet != 'yes' ) {
+            echo '<tr>';
+        }
         echo '<td class="td_line col-md-1 tv_host">'.$hostname.'</td>';
         echo '<td class="td_line sorting tv_service">-</td>';
         echo '<td class="td_line sorting tv_desc">'.$details["comment_data"].'</td>';
@@ -106,9 +110,10 @@ if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
         echo '<td class="td_line sorting tv_endtime">'.epochToDateTime($details["end_time"]).'</td>';
         echo '<td class="td_line sorting ts_status">'.$status.'</td>';
         echo '</tr>';
-        echo '</table>';
         if ($status=='failed') { return -1; }
+        $endSet='yes';
     }
+    if ( $endSet == 'yes' ) { echo '</table>'; }
 }
 
 if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
