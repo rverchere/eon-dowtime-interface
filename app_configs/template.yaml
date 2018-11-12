@@ -1,10 +1,10 @@
 ---
-displayname: "Test downtime interface"
+displayname: "Template configuration"
 app:
-  - host: Applications_Building
-    service: Test-int-downtime
+  - host: Applications_BP
+    service: Template
 hosts:
-  - host: Test-int-downtime1
+  - host: localhost
     services:
       - memory
       - partitions
@@ -12,5 +12,5 @@ hosts:
       - systime
       - uptime
     propagation_childs: false
-  - host: Test-int-downtime2
+  - host: test-host
     propagation_childs: false
