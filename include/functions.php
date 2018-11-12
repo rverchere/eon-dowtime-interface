@@ -28,12 +28,12 @@ function createTableList($yamlConfPath){
     $fileCount=1;
     $pickerCount=1;
     echo '<tr class="tr_head">';
-    echo '<th class="th_head col-md-1 t_appname">'.getLabel("label.users_downtime.tablehead.app").'</th>';
+    echo '<th class="th_head col-md-1 t_appname th_col-start">'.getLabel("label.users_downtime.tablehead.app").'</th>';
     echo '<th class="th_head sorting t_desc">'.getLabel("label.users_downtime.tablehead.desc").'</th>';
     echo '<th class="th_head sorting t_starttime">'.getLabel("label.users_downtime.tablehead.starttime").'</th>';
     echo '<th class="th_head sorting t_endtime">'.getLabel("label.users_downtime.tablehead.endtime").'</th>';
     echo '<th></th>';
-    echo '<th class="th_head t_actions"></th>';
+    echo '<th class="th_head t_actions th_col-end"></th>';
     echo '</tr>';
     foreach($confPath as $confFile) {
         $yamlFile=yaml_parse_file($yamlConfPath.'/'.$confFile);
