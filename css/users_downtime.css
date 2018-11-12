@@ -61,14 +61,11 @@ th
     height: 3em;
     text-align: center;
 }
-th.t_appname,th.tv_appname {
+th.th_col-start {
     border-radius: 3px 0px 0px 3px;
 }
-th.t_actions {
-    border-radius: 0px 5px 3px 0px;
-}
-th.tv_endtime {
-    border-radius: 0px 5px 3px 0px;
+th.th_col-end {
+    border-radius: 0px 3px 3px 0px;
 }
 
 td.t_desc
