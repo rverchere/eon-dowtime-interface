@@ -1,6 +1,4 @@
 <?php
-include_once("config.php");
-include_once("functions.php");
 include_once("header.php");
 
 echo '<h1 class="page-header">'.getLabel("label.users_downtime.title").'</h1>';
@@ -24,13 +22,7 @@ if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
     foreach ($yamlFile['app'] as $app) {
         echo '<h2>'.getLabel("label.users_downtime.set.app.title").'</h2>';
         echo '<table>';
-        echo '<tr class="tr_head">';
-        echo '<th class="th_head col-md-1 ts_appname th_col-start">'.getLabel("label.users_downtime.tablehead.app").'</th>';
-        echo '<th class="th_head sorting ts_desc">'.getLabel("label.users_downtime.tablehead.desc").'</th>';
-        echo '<th class="th_head sorting ts_starttime">'.getLabel("label.users_downtime.tablehead.starttime").'</th>';
-        echo '<th class="th_head sorting ts_endtime">'.getLabel("label.users_downtime.tablehead.endtime").'</th>';
-        echo '<th class="th_head sorting ts_status th_col-end">'.getLabel("label.users_downtime.tablehead.status").'</th>';
-        echo '</tr>';
+        createTableHead('app','submit');
         $appHostName=$app['host'];
         $appName=$app['service'];
         echo '<tr>';
@@ -55,14 +47,8 @@ if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
 
     echo '<h2>'.getLabel("label.users_downtime.set.hosts.title").'</h2>';
     echo '<table>';
-    echo '<tr class="tr_head">';
-    echo '<th class="th_head col-md-1 tv_host th_col-start">'.getLabel("label.users_downtime.tablehead.host").'</th>';
-    echo '<th class="th_head col-md-1 tv_service">'.getLabel("label.users_downtime.tablehead.service").'</th>';
-    echo '<th class="th_head sorting tv_desc">'.getLabel("label.users_downtime.tablehead.desc").'</th>';
-    echo '<th class="th_head sorting tv_starttime">'.getLabel("label.users_downtime.tablehead.starttime").'</th>';
-    echo '<th class="th_head sorting tv_endtime">'.getLabel("label.users_downtime.tablehead.endtime").'</th>';
-    echo '<th class="th_head sorting tv_status th_col-end">'.getLabel("label.users_downtime.tablehead.status").'</th>';
-    echo '</tr>';
+    createTableHead('host','');
+
 
     foreach ($yamlFile['hosts'] as $hosts) {
         $appHostName=$app['host'];
@@ -120,13 +106,8 @@ if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
     $confFile=$_POST['dwt_conf'];
     $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
     echo '<table>';
-    echo '<tr class="tr_head">';
-    echo '<th class="th_head col-md-1 tv_appname th_col-start">'.getLabel("label.users_downtime.tablehead.app").'</th>';
-    echo '<th class="th_head sorting tv_desc">'.getLabel("label.users_downtime.tablehead.desc").'</th>';
-    echo '<th class="th_head sorting tv_entrytime">'.getLabel("label.users_downtime.tablehead.entrytime").'</th>';
-    echo '<th class="th_head sorting tv_starttime">'.getLabel("label.users_downtime.tablehead.starttime").'</th>';
-    echo '<th class="th_head sorting tv_endtime th_col-end">'.getLabel("label.users_downtime.tablehead.endtime").'</th>';
-    echo '</tr>';
+    createTableHead('app','get');
+
 
     foreach ($yamlFile['app'] as $app) {
         $appHostName=$app['host'];
@@ -152,6 +133,7 @@ if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
 
 if (isset($_POST['dwt_config']) && $_POST['dwt_config']) {
 
+
     $confFile=$_POST['dwt_conf'];
     $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
     echo '<h3 class="page-header">'.$yamlFile['displayname'].'</h3>';
@@ -160,10 +142,7 @@ if (isset($_POST['dwt_config']) && $_POST['dwt_config']) {
     echo '<div>';
     echo '<h4 class="page-header">'.getLabel("label.users_downtime.tablehead.app").'</h4>';
     echo '<table>';
-    echo '<tr class="tr_head">';
-    echo '<th class="th_head sorting t_host th_col-start">'.getLabel("label.users_downtime.tablehead.host").'</th>';
-    echo '<th class="th_head sorting t_service th_col-end">'.getLabel("label.users_downtime.tablehead.service").'</th>';
-    echo '</tr>';
+    createTableHead('','configApp');
 
     foreach ($yamlFile['app'] as $app) {
         $host=$app['host'];
@@ -180,11 +159,7 @@ if (isset($_POST['dwt_config']) && $_POST['dwt_config']) {
     echo '<div>';
     echo '<h4 class="page-header">'.getLabel("label.users_downtime.tablehead.hosts").'</h4>';
     echo '<table>';
-    echo '<tr class="tr_head">';
-    echo '<th class="th_head sorting t_host th_col-start">'.getLabel("label.users_downtime.tablehead.host").'</th>';
-    echo '<th class="th_head sorting t_service">'.getLabel("label.users_downtime.tablehead.service").'</th>';
-    echo '<th class="th_head sorting t_child th_col-end">'.getLabel("label.users_downtime.tablehead.child").'</th>';
-    echo '</tr>';
+    createTableHead('','configHosts');
 
     foreach ($yamlFile['hosts'] as $hosts) {
         $host=$hosts['host'];
