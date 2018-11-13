@@ -37,7 +37,7 @@ function createTableList($yamlConfPath){
     echo '</tr>';
     foreach($confPath as $confFile) {
         $yamlFile=yaml_parse_file($yamlConfPath.'/'.$confFile);
-        echo '<td class="td_line col-md-1 t_appname">'.$yamlFile["displayname"].'</td>';
+        echo '<td class="td_line col-md-1 t_appname"><h4>'.$yamlFile["displayname"].'</h4></td>';
         echo '<td class="td_line sorting t_desc"><input type="text" name="dwt_desc" class="form-control"/></td>';
         echo '<td class="td_line sorting t_starttime"><b>
                 <div class="input-group date startdate" id="datetimepicker'.$fileCount.$pickerCount.'">
@@ -207,8 +207,8 @@ function eonGetServiceDowntime($server, $servername, $servicename) {
 }
 
 function epochToDateTime($epoch) {
-    $dt = new DateTime("@$epoch");
-    return $dt->format('Y-m-d H:i:s');
+    $dt = new DateTime("@$epoch");  // convert UNIX timestamp to PHP DateTime
+    return $dt->format('Y-m-d H:i:s'); // output = 2017-01-01 00:00:00
 }
 
 ?>
