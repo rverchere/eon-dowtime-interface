@@ -2,29 +2,35 @@
 
 ## Generic informations
 
+Application display name into front table
+```yaml
+displayname: "Template configuration"
+```
+
 ### Application
 
-- Host : Applications_Building
-  - Service :
-    - Test-int-downtime
+Application definition into EON services.
+```yaml
+app:
+  - host: Applications_BP
+    service: Template
+```
 
 ### Control point
 
-- Host1 : Test-int-downtime1
-  - Services :
-    - memory
-    - partition
-    - processor
-    - systime
-    - uptime
-
-- Host2 : Test-int-downtime2
-  - Services :
-    - memory
-    - partition
-    - processor
-    - systime
-    - uptime
+```yaml
+hosts:
+  - host: localhost
+    services:
+      - memory
+      - partitions
+      - processor
+      - systime
+      - uptime
+    propagation_childs: false
+  - host: test-host
+    propagation_childs: false
+```
 
 ## Needs expression
 
