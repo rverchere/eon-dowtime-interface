@@ -21,8 +21,8 @@
 */
 
 # Global parameters
-include_once("config.php");
-include_once("functions.php");
+include("config.php");
+include("functions.php");
 
 
 # Logos
