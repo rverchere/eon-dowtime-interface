@@ -12,11 +12,12 @@ include_once("include/header.php");
 							createTableHead('app','front');
 							foreach($confPath as $confFile) {
 								$yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
+								$yamlArray[$fileCount] = $yamlFile;
 								echo '<td class="td_line col-md-1 t_appname"><h4>'.$yamlFile["displayname"].'</h4></td>';
-								echo '<td class="td_line sorting t_desc"><input type="text" name="dwt_desc" class="form-control"/></td>';
+								echo '<td class="td_line sorting t_desc"><input type="text" name="dwt_desc'.$fileCount.'" class="form-control"/></td>';
 								echo '<td class="td_line sorting t_starttime"><b>
 										<div class="input-group date startdate" id="datetimepicker'.$fileCount.$pickerCount.'">
-											<input type="text" class="form-control" name="startdate" />
+											<input type="text" class="form-control" name="startdate'.$fileCount.'" />
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-calendar"></span>
 											</span>
@@ -28,7 +29,7 @@ include_once("include/header.php");
 								$pickerCount++;
 								echo '<td class="td_line sorting t_endtime"><b>
 										<div class="input-group date enddate" id="datetimepicker'.$fileCount.$pickerCount.'">
-											<input type="text" class="form-control" name="enddate" />
+											<input type="text" class="form-control" name="enddate'.$fileCount.'" />
 											<span class="input-group-addon">
 												<span class="glyphicon glyphicon-calendar"></span>
 											</span>
@@ -37,11 +38,14 @@ include_once("include/header.php");
 											</script>
 										</div>
 									</b></td>';
-								echo '<td><input type="hidden" class="inp_hidden" name="dwt_conf" value="'.$confFile.'"/></td>';
+								echo '<td>';
+									echo '<input type="checkbox" class="inp_hidden" name="cb" value="'.$fileCount.'"/>';
+									echo '<input type="hidden" class="inp_hidden" name="dwt_conf" value="'.htmlspecialchars(serialize($yamlArray)).'"/>';
+								echo '</td>';
 								echo '<td class="td_line  t_actions">';
-								echo '<input type="submit" name="dwt_submit" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.valid").'"/>';
-								echo '<input type="submit" name="dwt_get" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.get").'"/>';
-								echo '<input type="submit" name="dwt_config" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.config").'"/>';
+									echo '<input type="submit" name="dwt_submit" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.valid").'"/>';
+									echo '<input type="submit" name="dwt_get" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.get").'"/>';
+									echo '<input type="submit" name="dwt_config" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.config").'"/>';
 								echo '</td>';
 								echo '</tr>';
 								$fileCount++;

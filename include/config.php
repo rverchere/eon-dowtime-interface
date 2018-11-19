@@ -3,10 +3,8 @@
 $langformat="en";
 
 // # Define All Path
-//$path_eon="/srv/eyesofnetwork";
-$path_eon="/var/www";
-//$path_eonweb="$path_eon/eonweb";
-$path_eonweb="$path_eon/html";
+$path_eon="/srv/eyesofnetwork";
+$path_eonweb="$path_eon/eonweb";
 $path_images="/images";
 $path_logo="$path_images/logo.png";
 $path_logo_custom="$path_images/custom.logo.png";
