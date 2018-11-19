@@ -80,3 +80,8 @@ td.t_actions
 {
     align: center;
 }
+
+.inp_hidden
+{
+    display: none;
+}

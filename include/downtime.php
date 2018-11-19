@@ -4,12 +4,12 @@ include_once("header.php");
 echo '<h1 class="page-header">'.getLabel("label.users_downtime.title").'</h1>';
 
 if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
-    $desc=$_POST['dwt_desc'];
-    $startdate=$_POST['startdate'];
-    $enddate=$_POST['enddate'];
-    $confFile=$_POST['dwt_conf'];
-
-    $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
+    $lineID=$_POST['cb'];
+    $desc=$_POST['dwt_desc'.$lineID];
+    $startdate=$_POST['startdate'.$lineID];
+    $enddate=$_POST['enddate'.$lineID];
+    $confFile=unserialize($_POST['dwt_conf']);
+    $yamlFile=$confFile[$lineID];
 
     $details = [
         'comment_data' => "$desc",
@@ -103,8 +103,9 @@ if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
 }
 
 if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
-    $confFile=$_POST['dwt_conf'];
-    $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
+    $lineID=$_POST['cb'];
+    $confFile=unserialize($_POST['dwt_conf']);
+    $yamlFile=$confFile[$lineID];
     echo '<table>';
     createTableHead('app','get');
 
@@ -133,9 +134,9 @@ if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
 
 if (isset($_POST['dwt_config']) && $_POST['dwt_config']) {
 
-
-    $confFile=$_POST['dwt_conf'];
-    $yamlFile=yaml_parse_file($path_yaml_app_conf.'/'.$confFile);
+    $lineID=$_POST['cb'];
+    $confFile=unserialize($_POST['dwt_conf']);
+    $yamlFile=$confFile[$lineID];
     echo '<h3 class="page-header">'.$yamlFile['displayname'].'</h3>';
 
     // list applications (yaml app part)
