@@ -39,13 +39,13 @@ include_once("include/header.php");
 										</div>
 									</b></td>';
 								echo '<td>';
-									echo '<input type="radio" class="inp_hidden" name="cb" value="'.$fileCount.'"/>';
+									echo '<input type="radio" class="inp_hidden" id="'.$fileCount.'" name="cb" value="'.$fileCount.'"/>';
 									echo '<input type="hidden" class="inp_hidden" name="dwt_conf" value="'.htmlspecialchars(serialize($yamlArray)).'"/>';
 								echo '</td>';
 								echo '<td class="td_line  t_actions">';
-									echo '<input type="submit" name="dwt_submit" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.valid").'"/>';
+									echo '<input type="submit" name="dwt_submit" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.valid").'" onclick="document.getElementById('.$fileCount.').checked = true;"/>';
 									echo '<input type="submit" name="dwt_get" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.get").'"/>';
-									echo '<input type="submit" name="dwt_config" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.config").'"/>';
+									echo '<input type="submit" name="dwt_config" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.config").'" onclick="document.getElementById('.$fileCount.').checked = true;"/>';
 								echo '</td>';
 								echo '</tr>';
 								$fileCount++;
