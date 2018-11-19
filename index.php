@@ -39,7 +39,7 @@ include_once("include/header.php");
 										</div>
 									</b></td>';
 								echo '<td>';
-									echo '<input type="checkbox" class="inp_hidden" name="cb" value="'.$fileCount.'"/>';
+									echo '<input type="radio" class="inp_hidden" name="cb" value="'.$fileCount.'"/>';
 									echo '<input type="hidden" class="inp_hidden" name="dwt_conf" value="'.htmlspecialchars(serialize($yamlArray)).'"/>';
 								echo '</td>';
 								echo '<td class="td_line  t_actions">';
