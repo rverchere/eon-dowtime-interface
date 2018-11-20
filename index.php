@@ -44,7 +44,7 @@ include_once("include/header.php");
 								echo '</td>';
 								echo '<td class="td_line  t_actions">';
 									echo '<input type="submit" name="dwt_submit" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.valid").'" onclick="document.getElementById('.$fileCount.').checked = true;"/>';
-									echo '<input type="submit" name="dwt_get" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.get").'"/>';
+									echo '<input type="submit" name="dwt_get" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.get").'" onclick="document.getElementById('.$fileCount.').checked = true;"/>';
 									echo '<input type="submit" name="dwt_config" class="btn btn-sm btn-primary dwt_button" value="'.getLabel("label.users_downtime.button.action.config").'" onclick="document.getElementById('.$fileCount.').checked = true;"/>';
 								echo '</td>';
 								echo '</tr>';
