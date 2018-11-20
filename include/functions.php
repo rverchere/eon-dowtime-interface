@@ -178,7 +178,6 @@ function createTableHead($type,$tableID) {
                 echo '<th class="th_head sorting ts_status th_col-end">'.getLabel("label.users_downtime.tablehead.status").'</th>';
                 break;
             case 'get':
-                echo '<th class="th_head sorting tv_desc">'.getLabel("label.users_downtime.tablehead.desc").'</th>';
                 echo '<th class="th_head sorting tv_entrytime">'.getLabel("label.users_downtime.tablehead.entrytime").'</th>';
                 echo '<th class="th_head sorting tv_starttime">'.getLabel("label.users_downtime.tablehead.starttime").'</th>';
                 echo '<th class="th_head sorting tv_endtime th_col-end">'.getLabel("label.users_downtime.tablehead.endtime").'</th>';
