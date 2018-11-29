@@ -1,5 +1,6 @@
 <?php
 include_once("include/header.php");
+ini_set("date.timezone", $_ENV["TZ"]);
 ?>
 		<h1 class="page-header"><?php echo getLabel("label.users_downtime.title") ?> </h1>
 			<form action="include/downtime.php" method="post">
