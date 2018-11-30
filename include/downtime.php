@@ -28,8 +28,8 @@ if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
         echo '<tr>';
         echo '<td class="td_line col-md-1 ts_appname"><h4>'.$appName.'</h4></td>';
         echo '<td class="td_line sorting ts_desc">'.$details["comment_data"].'</td>';
-        echo '<td class="td_line sorting ts_starttime">'.$startdate.'</td>';
-        echo '<td class="td_line sorting ts_endtime">'.$enddate.'</td>';
+        echo '<td class="td_line sorting ts_starttime">'.epochToDateTime($details['start_time']).'</td>';
+        echo '<td class="td_line sorting ts_endtime">'.epochToDateTime($details['end_time']).'</td>';
 
         $result = thrukSetDowntime($dwt_dest_srv, $appHostName, $appName, $details);
         if ($result==null) {
@@ -69,8 +69,8 @@ if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
                 echo '<td class="td_line col-md-1 tv_host">'.$hostname.'</td>';
                 echo '<td class="td_line col-md-1 tv_service">'.$service.'</td>';
                 echo '<td class="td_line sorting tv_desc">'.$details["comment_data"].'</td>';
-                echo '<td class="td_line sorting tv_starttime">'.$startdate.'</td>';
-                echo '<td class="td_line sorting tv_endtime">'.$enddate.'</td>';
+                echo '<td class="td_line sorting ts_starttime">'.epochToDateTime($details['start_time']).'</td>';
+                echo '<td class="td_line sorting ts_endtime">'.epochToDateTime($details['end_time']).'</td>';
                 echo '<td class="td_line sorting ts_status">'.$status.'</td>';
                 echo '</tr>';
                 $svcSet='yes';
@@ -92,8 +92,8 @@ if (isset($_POST['dwt_submit']) && $_POST['dwt_submit']) {
         echo '<td class="td_line col-md-1 tv_host">'.$hostname.'</td>';
         echo '<td class="td_line sorting tv_service">-</td>';
         echo '<td class="td_line sorting tv_desc">'.$details["comment_data"].'</td>';
-        echo '<td class="td_line sorting tv_starttime">'.$startdate.'</td>';
-        echo '<td class="td_line sorting tv_endtime">'.$enddate.'</td>';
+        echo '<td class="td_line sorting ts_starttime">'.epochToDateTime($details['start_time']).'</td>';
+        echo '<td class="td_line sorting ts_endtime">'.epochToDateTime($details['end_time']).'</td>';
         echo '<td class="td_line sorting ts_status">'.$status.'</td>';
         echo '</tr>';
         if ($status=='failed') { return -1; }
