@@ -155,7 +155,8 @@ function eonGetServiceDowntime($server, $servername, $servicename) {
 
 function epochToDateTime($epoch) {
     $dt = new DateTime("@$epoch");  // convert UNIX timestamp to PHP DateTime
-    return $dt->format('Y-m-d H:i:s'); // output = 2017-01-01 00:00:00
+    $dt->setTimeZone(new DateTimeZone($_ENV["TZ"]));
+    return $dt->format('Y-m-d H:i:s O'); // output = 2017-01-01 00:00:00
 }
 
 function createTableHead($type,$tableID) {

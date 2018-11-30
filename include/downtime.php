@@ -122,9 +122,9 @@ if (isset($_POST['dwt_get']) && $_POST['dwt_get']) {
                 echo '<tr>';
                 echo '<td class="td_line col-md-1 tv_appname"><h4>'.$appName.'</h4></td>';
                 echo '<td class="td_line col-md-1 tv_comment">'.$r['comment'].'</td>';
-                echo '<td class="td_line col-md-1 tv_entrytime">'.epochToDateTime($r['entry_time']).' UTC </td>';
-                echo '<td class="td_line col-md-1 tv_starttime">'.epochToDateTime($r['start_time']).' UTC </td>';
-                echo '<td class="td_line col-md-1 tv_endtime">'.epochToDateTime($r['end_time']).' UTC </td>';
+                echo '<td class="td_line col-md-1 tv_entrytime">'.epochToDateTime($r['entry_time']).'</td>';
+                echo '<td class="td_line col-md-1 tv_starttime">'.epochToDateTime($r['start_time']).'</td>';
+                echo '<td class="td_line col-md-1 tv_endtime">'.epochToDateTime($r['end_time']).'</td>';
                 echo '</tr><br/>';
             }
         }
