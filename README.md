@@ -1,24 +1,62 @@
 # User downtime interface
 
-## Generic informations
+## Introduction
 
-Application display name into front table
-```yaml
-displayname: "Template configuration"
+## Run container
+
+First, you need to build image from Dockerfile :
+
+```bash
+docker build -t eon-downtime-interface .
 ```
 
-### Application
+### Direct run
 
-Application definition into EON services.
+```
+docker run -d |
+      --restart=always \
+      -p 8080:80 \
+      -v /srv/docker-data/eon-dwt-int:/var/www/html \
+      -e EON_APIKEY=<specify API key here>
+      -e TZ=Europe/Paris
+      eon-downtime-interface
+```
+
+### Docker Compose
+
+You could use provided docker-compose.yml to run previously build image :
+
 ```yaml
+version: '3.6'
+
+services:
+  downtime:
+    image: eon-downtime-interface
+    container_name: downtime-interface
+    ports:
+      - 8080:80
+    environment:
+      - EON_APIKEY=<specify API key here>
+      - TZ=Europe/Paris
+    volumes:
+      - /srv/docker-data/eon-dwt-int:/var/www/html
+    restart: always
+```
+
+To launch container, just run :
+
+```yaml
+docker-compose up -d
+```
+
+## Applications file
+
+```yaml
+---
+displayname: "Template configuration"
 app:
   - host: Applications_BP
     service: Template
-```
-
-### Control point
-
-```yaml
 hosts:
   - host: localhost
     services:
@@ -30,84 +68,4 @@ hosts:
     propagation_childs: false
   - host: test-host
     propagation_childs: false
-```
-
-## Needs expression
-
-Create simple web interfaces to create applications downtime (high and low level) into EyesOfNetwork throught REST API, NRDP or Thruk API.
-
-Interface format (simple description)
-```
-<Nom application>      <Champ texte de description du downtime>  <date/heure de début> <date/heure de fin> <bouton valider>
-```
-
-The interface should mask all downtime processing and generate report on applicated downtimes.
-
-## How ?
-
-The web interface should call script will permit do creation downtimes into monitoring app.
-It will be necessary to create code fully generic to correspond to all use cases.
-
-Functionnaly, it should be necessary to use parameters file collection defining content and ensemble of targets them receive the needed downtime.
-This file will be unique by application.
-By préférence, it will be at yaml format to give good readability and facility to modify.
-
-### Configuration file
-
-This file should contain the ensemble of next's informations :
-
-- Application name (Business Process name)
-- Host will permit BP check into monitoring process
-- Service according to BP name
-- Unitary hostnames composing applications
-- Unitary services linked to host.
-
-#### YAML Format Proposition
-
-```yaml
----
-- app: <nom application>
-  hosts:
-  - host: <application_host>
-    services:
-      - Application1
-    propagation_enfants: true/false
-  - host: hostapp1
-    services:
-      - memory
-      - partitions
-      - processor
-      - systime
-      - uptime
-    propagation_enfants: true/false
-  - host: hostapp2
-    services:
-      - memory
-      - partitions
-      - processor
-      - systime
-      - uptime
-    propagation_enfants: true/false
-```
-
-## Docker
-
-A Dockerfile is provided to run php application in a container.
-
-The container uses php image base plus:
-- curl
-- yaml
-
-### Build
-
-```
-$ docker build -t eon-downtime-php .
-```
-
-### Run
-
-Just map the current working dir to `/var/www/html`. `EON_APIKEY` has to be set as environment variable to access to EON API.
-
-```
-$ docker run -d -p 1080:80 --name eon-downtime-php -d -e EON_APIKEY="my_api_key" -v "$PWD":/var/www/html eon-downtime-php
 ```
