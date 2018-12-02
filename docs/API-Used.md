@@ -68,8 +68,8 @@ All theses two API need informations to work provided by JSON :
 ```json
 {
   [
-    'comment_data': '<Downtime description>',
-    'comment_author': '$dwt_author'
+    "comment_data": "<Downtime description>",
+    "comment_author": "$dwt_author"
   ]
 }
 ```
