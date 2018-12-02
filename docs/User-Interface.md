@@ -17,3 +17,11 @@ All configuration is masked for endless users.
 ## View Configurations
 
 ![viewconfig](./images/view_config.png)
+
+## View Existings
+
+You could view existing non recurring downtime set on specific application by clicking on « View Existing » button.
+
+This interface show you existing set downtimes into EyesOfNetwork with cause, start/end informations, and when downtime was set.
+
+![viewexisting](./images/view_existing.png)
