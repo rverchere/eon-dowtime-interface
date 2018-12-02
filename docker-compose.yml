@@ -1,0 +1,14 @@
+version: '3.6'
+
+services:
+  downtime:
+    image: eon-dowtime-interface
+    container_name: downtime-interface
+    ports:
+      - 8080:80
+    environment:
+      - EON_APIKEY=<specify API key here>
+      - TZ=Europe/Paris
+    volumes:
+      - /srv/docker-data/eon-dwt-int:/var/www/html
+    restart: always
